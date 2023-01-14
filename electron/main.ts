@@ -3,6 +3,10 @@ import { BrowserWindow, app } from 'electron';
 
 app.whenReady().then(() => {
   const mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    vibrancy: 'under-window',
+    visualEffectState: 'active',
     webPreferences: {
       preload: path.resolve(__dirname, 'preload.js'),
     },

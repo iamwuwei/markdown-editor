@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import './App.css';
+import { Editor } from './component/editor';
 
 export const App = () => {
-  const [count, setCount] = useState(0);
+  const [text, setText] = useState<string>('');
 
   return (
-    <div className="container">
-      <h1>{count}</h1>
-      <button onClick={() => setCount((count) => count + 1)}>Count</button>
+    <div className="app">
+      <Editor defaultValue={text} />
     </div>
   );
 };
