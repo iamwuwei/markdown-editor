@@ -5,6 +5,9 @@ html, body {
   margin: 0;
   padding: 0;
 }
+#root {
+  height: 100%;
+}
 .app {
   text-align: center;
   font-family: sans-serif;
