@@ -26,7 +26,7 @@ const common: Configuration = {
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
-        test: /\.(ico|png|svg|eot|woff?2?)$/,
+        test: /\.(icns|ico|png|svg|eot|woff?2?)$/,
         type: 'asset/resource',
       },
     ],
