@@ -14,9 +14,17 @@ html, body {
   background-color: transparent;
   height: 100%;
   width: 100%;
+  display: flex;
 }
-.editor {
+.editor-wrapper {
+  flex: 0 0 50%;
   text-align: left;
   background-color: transparent;
   height: 100%;
+}
+.preview-wrapper {
+  flex: 0 0 50%;
+  height: 100%;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.563);
 }

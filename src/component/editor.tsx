@@ -6,5 +6,5 @@ export const Editor = () => {
     const [doc, setDoc] = useState("# Hello World")
     const [editorRef, editorView] = useCodeMirror<HTMLDivElement>({ initialDoc: doc, setDoc: setDoc })
   
-    return <div ref={editorRef} className='editor'/>
+    return <div ref={editorRef} className='editor-wrapper'/>
 }
