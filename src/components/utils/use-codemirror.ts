@@ -6,7 +6,9 @@ import { indentWithTab, defaultKeymap, historyKeymap } from '@codemirror/command
 import { markdown, markdownLanguage } from "@codemirror/lang-markdown";
 import {
     syntaxHighlighting,
-    HighlightStyle
+    HighlightStyle,
+    indentOnInput,
+    bracketMatching
 } from '@codemirror/language'
 import { tags } from "@lezer/highlight"
 import { 
@@ -74,6 +76,8 @@ export const useCodeMirror = <T extends Element>(props: Props): [React.MutableRe
                 lineNumbers(), // 行数表示
                 highlightActiveLine(), // カーソル行ハイライト
                 highlightActiveLineGutter(), // カーソル行の gutter ハイライト
+                indentOnInput(),
+                bracketMatching(),
                 markdown({
                     base: markdownLanguage, // GFM支援
                 }),
