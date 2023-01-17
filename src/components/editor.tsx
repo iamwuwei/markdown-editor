@@ -10,8 +10,7 @@ export const Editor = () => {
     const [editorRef, editorView] = useCodeMirror<HTMLDivElement>({ initialDoc: doc, setDoc: setDoc })
   
     useEffect(() => {
-        console.log(doc)
-        docDispatch({type: DocActionType.Update, payload: doc})
+        docDispatch({ type: DocActionType.Update, payload: doc })
     }, [doc])
 
     return <div ref={editorRef} className='editor-wrapper'/>
