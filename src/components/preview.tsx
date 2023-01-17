@@ -1,4 +1,4 @@
-import { createElement, Fragment, useEffect, useState } from 'react'
+import { createElement, Fragment, useContext } from 'react'
 
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
@@ -7,9 +7,12 @@ import rehypeReact from 'rehype-react'
 import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 
+import { DocContext } from '../context/context'
 const SAMPLE: string = "# Heading 1";
 
 export const Preview = () => {
+    const { docState } = useContext(DocContext)
+
     const markdown = unified()
         .use(remarkParse)
         .use(remarkGfm)
@@ -19,7 +22,7 @@ export const Preview = () => {
             Fragment: Fragment,
             createElement: createElement,
         })
-        .processSync(SAMPLE).result
+        .processSync(docState.content).result
 
     return (
         <div className='preview-wrapper'>{ markdown }</div>

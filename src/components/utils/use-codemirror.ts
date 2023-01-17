@@ -22,6 +22,7 @@ interface Props {
     initialDoc: string;
     setDoc: React.Dispatch<React.SetStateAction<string>>;
 }
+
 export const useCodeMirror = <T extends Element>(props: Props): [React.MutableRefObject<T | null>, EditorView?] => {
     const editorParentRef = useRef<T>(null);
     const [editorView, setEditorView] = useState<EditorView>();
