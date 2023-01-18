@@ -20,12 +20,17 @@ html, body {
   overflow-y: hidden;
 }
 
+.center-line {
+  background-color: rgba(221, 221, 221, 0.12);
+  width: 3px;
+  height: 100%;
+}
+
 .editor-wrapper {
   flex: 0 0 50%;
   text-align: left;
   background-color: transparent;
   height: 100%;
-  padding: 0 12px 0 0;
 }
 
 .editor-wrapper .cm-scroller::-webkit-scrollbar {
@@ -47,7 +52,6 @@ html, body {
   text-align: left;
   font-size: 14px; /* make it same as codemirror */
   padding: 0 12px 0 12px;
-  border-left: solid 1px rgba(221, 221, 221, 0.12);
   overflow-y: auto;
 }
 

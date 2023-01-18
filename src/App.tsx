@@ -14,6 +14,7 @@ export const App = () => {
     <div className="app">
       <DocContext.Provider value={{ docState, docDispatch }}>
         <Editor />
+        <div className='center-line'></div>
         <Preview />
       </DocContext.Provider>
     </div>
