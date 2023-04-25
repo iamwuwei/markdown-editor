@@ -22,8 +22,12 @@ html, body {
 
 .center-line {
   background-color: rgba(221, 221, 221, 0.12);
-  width: 3px;
+  width: 4px;
   height: 100%;
+}
+
+.center-line:hover {
+  cursor: col-resize;
 }
 
 .editor-wrapper {
@@ -33,18 +37,22 @@ html, body {
   height: 100%;
 }
 
+.editor-wrapper .cm-scroller {
+  overflow-y: auto;
+}
+
 .editor-wrapper .cm-scroller::-webkit-scrollbar {
   width: 7px;
-} 
+}
 
 .editor-wrapper .cm-scroller::-webkit-scrollbar-track {
   background-color: transparent;
-} 
+}
 
 .editor-wrapper .cm-scroller::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: rgba(128, 128, 128, 0.363);
-} 
+}
 
 .preview-wrapper {
   width: 100%;
@@ -57,16 +65,16 @@ html, body {
 
 .preview-wrapper::-webkit-scrollbar {
   width: 7px;
-} 
+}
 
 .preview-wrapper::-webkit-scrollbar-track {
   background-color: transparent;
-} 
+}
 
 .preview-wrapper::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: rgba(128, 128, 128, 0.363);
-} 
+}
 
 .preview-wrapper.markdown-body.dark {
   background-color: transparent;

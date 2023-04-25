@@ -1,4 +1,4 @@
-import { createElement, Fragment, useContext } from 'react'
+import { createElement, Fragment, useContext, useEffect, useRef } from 'react'
 
 import { unified } from 'unified'
 import remarkParse from 'remark-parse'
@@ -9,24 +9,49 @@ import remarkRehype from 'remark-rehype'
 import rehypeStringify from 'rehype-stringify'
 import "github-markdown-css/github-markdown-light.css";
 
-import { DocContext } from '../context/context'
+import { DocContext, ScrollContext } from '../context/contexts'
+let treeData: any = null;
 
 export const Preview = () => {
-    const { docState } = useContext(DocContext)
+  const previewerRef = useRef(null)
+  const { docState } = useContext(DocContext)
+  const { editorScrollState, editorScrollDispatch, lineElementState } = useContext(ScrollContext)
 
-    const markdown = unified()
-        .use(remarkParse)
-        .use(remarkGfm)
-        .use(remarkMath)
-        .use(remarkRehype)
-        .use(rehypeStringify)
-        .use(rehypeReact, {
-            Fragment: Fragment,
-            createElement: createElement,
-        })
-        .processSync(docState.content).result
+  useEffect(() => {
+    console.log(editorScrollState)
+    if (previewerRef.current) {
+      const lineElementHeight: number = lineElementState.to - lineElementState.from;
 
-    return (
-        <div className='preview-wrapper markdown-body dark'>{ markdown }</div>
-    )
+      const previewerScrollable = previewerRef.current as HTMLDivElement
+      previewerScrollable.scrollTop = previewerScrollable.scrollHeight * editorScrollState.scrollPercentage
+    }
+  }, [editorScrollState])
+
+
+  const handleOnScroll = () => {
+    console.log(treeData.children)
+    // console.log(treeData.children.filter((value: any) => {
+    //   return value.type == 'elem
+    // }))
+  }
+
+  const markdown = unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkMath)
+    .use(remarkRehype)
+    .use(rehypeStringify)
+    .use(() => (tree) => {
+      treeData = tree; //treeData length corresponds to previewer's childNodes length
+      return tree
+    })
+    .use(rehypeReact, {
+      Fragment: Fragment,
+      createElement: createElement,
+    })
+    .processSync(docState.content).result
+
+  return (
+    <div ref={previewerRef} className='preview-wrapper markdown-body dark' onScroll={ handleOnScroll }>{ markdown }</div>
+  )
 }

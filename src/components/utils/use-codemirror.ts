@@ -11,12 +11,13 @@ import {
     bracketMatching
 } from '@codemirror/language'
 import { tags } from "@lezer/highlight"
-import { 
-    highlightActiveLine, 
-    EditorView, 
+import {
+    highlightActiveLine,
+    EditorView,
+    ViewUpdate,
     keymap,
-    highlightActiveLineGutter, 
-    lineNumbers 
+    highlightActiveLineGutter,
+    lineNumbers
 } from '@codemirror/view'
 import { oneDark } from "@codemirror/theme-one-dark";
 
@@ -35,9 +36,9 @@ export const useCodeMirror = <T extends Element>(props: Props): [React.MutableRe
         }
     })
     const markdownHighlightingStyle = HighlightStyle.define([
-        { 
-            tag: tags.heading1, 
-            fontSize: "2.2em", 
+        {
+            tag: tags.heading1,
+            fontSize: "2.2em",
             fontWeight: "bold" },
         {
             tag: tags.heading2,
@@ -67,7 +68,6 @@ export const useCodeMirror = <T extends Element>(props: Props): [React.MutableRe
     ])
     useEffect(() => {
         if (!editorParentRef.current) return
-        
         const editorInitailState = EditorState.create({
             doc: props.initialDoc,
             extensions: [
@@ -89,6 +89,7 @@ export const useCodeMirror = <T extends Element>(props: Props): [React.MutableRe
                     if (update.docChanged) {
                         // update doc state
                         props.setDoc(update.state.doc.toString());
+                        console.log(update.state.doc.toString());
                     }
                 }),
             ],
@@ -98,13 +99,13 @@ export const useCodeMirror = <T extends Element>(props: Props): [React.MutableRe
             state: editorInitailState,
             parent: editorParentRef.current,
         })
-        
+
         setEditorView(editorView)
-        
+
         return () => {
             editorView.destroy()
         }
     }, [editorParentRef])
-  
+
     return [editorParentRef, editorView]
 }
