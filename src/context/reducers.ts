@@ -49,20 +49,3 @@ export const previewerScrollReducer = (state: Scroll, action: ScrollActions) => 
 		}
 	}
 }
-
-export enum LineElementActionType {
-	Update,
-}
-export type LineElementActions = { type: LineElementActionType.Update, payload: LineElement }
-
-export const lineElementReducer = (state: LineElement, action: LineElementActions) => {
-	const { type, payload } = action;
-
-	switch(type) {
-		case LineElementActionType.Update:
-			return { ...state, number: payload.number, from: payload.from, to: payload.to}
-		default: {
-			throw Error('Unknown action: ' + type);
-		}
-	}
-}

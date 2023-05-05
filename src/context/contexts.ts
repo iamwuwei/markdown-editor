@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { Doc, LineElement, Scroll } from '../models/type';
+import { Doc, Scroll } from '../models/type';
 
 type DocContextType = {
 	docState: Doc;
@@ -11,8 +11,6 @@ type ScrollContextType = {
 	editorScrollDispatch: any;
 	previewerScrollState: Scroll;
 	previewerScrollDispatch: any;
-	lineElementState: LineElement;
-	lineElementDispatch: any;
 }
 
 export const DocContext = createContext<DocContextType>({
@@ -25,6 +23,4 @@ export const ScrollContext = createContext<ScrollContextType>({
 	editorScrollDispatch: null,
 	previewerScrollState: { scrollPercentage: 0, scrollTop: 0 },
 	previewerScrollDispatch: null,
-	lineElementState: {from: 0, to: 0, number: 0},
-	lineElementDispatch: null,
 });

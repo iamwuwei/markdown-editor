@@ -7,6 +7,7 @@ app.whenReady().then(() => {
   const options: BrowserWindowConstructorOptions = {
     width: 800,
     height: 600,
+    show: false, // Use 'ready-to-show' event to show window
     vibrancy: 'under-window',
     visualEffectState: 'active',
     webPreferences: {
@@ -19,9 +20,15 @@ app.whenReady().then(() => {
 
   mainWindow.loadFile('dist/index.html')
 
-  if (isDev) {
-    mainWindow.webContents.openDevTools()
-  }
+  mainWindow.on('ready-to-show', () => {
+    if (!mainWindow?.isVisible()) {
+      mainWindow?.show();
+    }
+
+    if (isDev) {
+      mainWindow.webContents.openDevTools()
+    }
+  });
 });
 
 app.once('window-all-closed', () => app.quit())

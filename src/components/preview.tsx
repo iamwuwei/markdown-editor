@@ -15,25 +15,14 @@ let treeData: any = null;
 export const Preview = () => {
   const previewerRef = useRef(null)
   const { docState } = useContext(DocContext)
-  const { editorScrollState, editorScrollDispatch, lineElementState } = useContext(ScrollContext)
+  const { editorScrollState, editorScrollDispatch } = useContext(ScrollContext)
 
   useEffect(() => {
-    console.log(editorScrollState)
     if (previewerRef.current) {
-      const lineElementHeight: number = lineElementState.to - lineElementState.from;
-
       const previewerScrollable = previewerRef.current as HTMLDivElement
-      previewerScrollable.scrollTop = previewerScrollable.scrollHeight * editorScrollState.scrollPercentage
+      previewerScrollable.scrollTop = (previewerScrollable.scrollHeight - previewerScrollable.clientHeight) * editorScrollState.scrollPercentage
     }
   }, [editorScrollState])
-
-
-  const handleOnScroll = () => {
-    console.log(treeData.children)
-    // console.log(treeData.children.filter((value: any) => {
-    //   return value.type == 'elem
-    // }))
-  }
 
   const markdown = unified()
     .use(remarkParse)
@@ -43,6 +32,7 @@ export const Preview = () => {
     .use(rehypeStringify)
     .use(() => (tree) => {
       treeData = tree; //treeData length corresponds to previewer's childNodes length
+      console.log(tree)
       return tree
     })
     .use(rehypeReact, {
@@ -52,6 +42,6 @@ export const Preview = () => {
     .processSync(docState.content).result
 
   return (
-    <div ref={previewerRef} className='preview-wrapper markdown-body dark' onScroll={ handleOnScroll }>{ markdown }</div>
+    <div ref={previewerRef} className='preview-wrapper markdown-body dark'>{ markdown }</div>
   )
 }

@@ -3,7 +3,7 @@ import './App.css';
 import { Editor } from './components/editor';
 import { Preview } from './components/preview';
 import { DocContext, ScrollContext } from './context/contexts';
-import { docReducer, editorScrollReducer, previewerScrollReducer, lineElementReducer } from './context/reducers';
+import { docReducer, editorScrollReducer, previewerScrollReducer } from './context/reducers';
 import { Doc, Scroll } from './models/type';
 import { SAMPLE } from '../resources/mock/mock';
 
@@ -14,7 +14,6 @@ export const App = () => {
   const initialScroll: Scroll = { scrollPercentage: 0, scrollTop: 0 };
   const [editorScrollState, editorScrollDispatch] = useReducer(editorScrollReducer, initialScroll)
   const [previewerScrollState, previewerScrollDispatch] = useReducer(previewerScrollReducer, initialScroll)
-  const [lineElementState, lineElementDispatch] = useReducer(lineElementReducer, {number: 0, from: 0 , to: 0})
 
   return (
     <div className="app">
@@ -23,7 +22,6 @@ export const App = () => {
           value={{
             editorScrollState, editorScrollDispatch,
             previewerScrollState, previewerScrollDispatch,
-            lineElementState, lineElementDispatch
           }}
         >
           <Editor />
